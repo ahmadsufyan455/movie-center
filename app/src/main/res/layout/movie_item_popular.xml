@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="280dp"
+    android:layout_gravity="center"
+    android:layout_marginStart="16dp"
+    app:cardBackgroundColor="@color/colorPrimaryDark"
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_image"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            app:cardCornerRadius="8dp">
+
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/mov1" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_image"
+            android:layout_marginTop="8dp"
+            android:maxLines="3"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            tools:text="Artemis Fowl" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            tools:text="2020-06-05" />
+
+        <ImageView
+            android:id="@+id/img_star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/card_image"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="18dp"
+            android:src="@drawable/ic_baseline_star_24" />
+
+        <TextView
+            android:id="@+id/tv_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_image"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="18dp"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            tools:text="7.8" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
