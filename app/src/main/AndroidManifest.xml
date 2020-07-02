@@ -11,11 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.DetailTvRecommendActivity"></activity>
+        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.DetailTvRecommendActivity" />
         <activity android:name=".ui.DetailRecommendationActivity" />
         <activity android:name=".ui.DetailTvActivity" />
         <activity android:name=".ui.DetailMovieActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
