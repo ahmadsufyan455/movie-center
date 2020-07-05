@@ -15,12 +15,14 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.squareup.picasso.Picasso
 import cz.msebera.android.httpclient.Header
+import kotlinx.android.synthetic.main.activity_detail_movie.*
 import kotlinx.android.synthetic.main.activity_detail_tv.*
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.*
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.ic_back
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.img_backdrop
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.img_poster
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.progressBar
+import kotlinx.android.synthetic.main.activity_detail_tv_recommend.textView4
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.tv_cast_tvShow
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.tv_date
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.tv_genre
@@ -71,6 +73,7 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                 responseBody: ByteArray?
             ) {
                 progressBar.visibility = View.GONE
+                view_recommendation_tv.visibility = View.GONE
                 val result = String(responseBody!!)
                 Log.d(TAG, result)
 
@@ -122,6 +125,7 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar.visibility = View.GONE
+                view_recommendation_tv.visibility = View.GONE
                 Toast.makeText(
                     this@DetailTvRecommendActivity,
                     "your connection failed",
@@ -217,6 +221,10 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                         tvRecommendations.add(tvRecommendation)
                     }
 
+                    if (jsonArray.length() == 0) {
+                        textView4.visibility = View.INVISIBLE
+                    }
+
                     val tvRecommendationAdapter = TvRecommendationAdapter(tvRecommendations)
 
                     rv_tvRecommendation_rec.layoutManager = LinearLayoutManager(
@@ -286,7 +294,8 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                         startActivity(toTrailer)
                     }
 
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
             }
 
             override fun onFailure(
@@ -295,7 +304,7 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                TODO("Not yet implemented")
+                Log.d("onFailure", error?.message.toString())
             }
 
         })

@@ -15,7 +15,9 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.squareup.picasso.Picasso
 import cz.msebera.android.httpclient.Header
+import kotlinx.android.synthetic.main.activity_detail_movie.*
 import kotlinx.android.synthetic.main.activity_detail_recommendation.*
+import kotlinx.android.synthetic.main.activity_detail_recommendation.textView4
 import org.json.JSONObject
 import java.lang.Exception
 import java.lang.StringBuilder
@@ -59,6 +61,7 @@ class DetailRecommendationActivity : AppCompatActivity() {
                 responseBody: ByteArray?
             ) {
                 progressBar_rec.visibility = View.GONE
+                view_recommendation.visibility = View.GONE
                 val result = String(responseBody!!)
                 Log.d(TAG, result)
 
@@ -106,6 +109,7 @@ class DetailRecommendationActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar_rec.visibility = View.GONE
+                view_recommendation.visibility = View.GONE
                 Toast.makeText(
                     this@DetailRecommendationActivity,
                     "your connection failed",
@@ -200,6 +204,10 @@ class DetailRecommendationActivity : AppCompatActivity() {
                         recommendations.add(recommendationMovie)
                     }
 
+                    if (jsonArray.length() == 0) {
+                        textView4.visibility = View.INVISIBLE
+                    }
+
                     val recommendationAdapter = MovieAdapter(recommendations)
 
                     rv_recommendation_rec.layoutManager = LinearLayoutManager(
@@ -279,7 +287,7 @@ class DetailRecommendationActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                TODO("Not yet implemented")
+                Log.d("onFailure", error?.message.toString())
             }
 
         })

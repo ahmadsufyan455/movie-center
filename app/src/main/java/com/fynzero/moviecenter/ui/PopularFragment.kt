@@ -85,6 +85,7 @@ class PopularFragment : Fragment() {
             if (movieList != null) {
                 movieAdapter.setData(movieList)
                 progressBar.visibility = View.GONE
+                view_popular.visibility = View.GONE
             }
         })
     }

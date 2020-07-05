@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"/>
+        <activity
+            android:name=".ui.SearchListActivity"
+            android:label="search result"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.DetailTvRecommendActivity" />
         <activity android:name=".ui.DetailRecommendationActivity" />
         <activity android:name=".ui.DetailTvActivity" />

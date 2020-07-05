@@ -70,6 +70,7 @@ class DetailTvActivity : AppCompatActivity() {
                 responseBody: ByteArray?
             ) {
                 progressBar.visibility = View.GONE
+                view_detail_tv.visibility = View.GONE
                 val result = String(responseBody!!)
                 Log.d(TAG, result)
 
@@ -119,6 +120,7 @@ class DetailTvActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar.visibility = View.GONE
+                view_detail_tv.visibility = View.GONE
                 Toast.makeText(this@DetailTvActivity, "your connection failed", Toast.LENGTH_SHORT)
                     .show()
             }
@@ -210,6 +212,10 @@ class DetailTvActivity : AppCompatActivity() {
                         tvRecommendations.add(tvRecommendation)
                     }
 
+                    if (jsonArray.length() == 0) {
+                        tv_label_rec.visibility = View.INVISIBLE
+                    }
+
                     val tvRecommendationAdapter = TvRecommendationAdapter(tvRecommendations)
 
                     rv_tvRecommendation.layoutManager = LinearLayoutManager(
@@ -289,7 +295,7 @@ class DetailTvActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                TODO("Not yet implemented")
+                Log.d("onFailure", error?.message.toString())
             }
 
         })

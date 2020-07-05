@@ -9,4 +9,7 @@
     <string name="cast">Cast</string>
     <string name="recommendation">Recommendation</string>
     <string name="crew">Crew</string>
+    <string name="search">search</string>
+    <string name="search_hint">search your movies</string>
+    <string name="no_result">No results found</string>
 </resources>

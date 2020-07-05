@@ -59,6 +59,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 responseBody: ByteArray?
             ) {
                 progressBar.visibility = View.GONE
+                view_detail.visibility = View.GONE
                 val result = String(responseBody!!)
                 Log.d(TAG, result)
 
@@ -107,6 +108,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar.visibility = View.GONE
+                view_detail.visibility = View.GONE
                 Toast.makeText(
                     this@DetailMovieActivity,
                     "your connection failed",
@@ -201,6 +203,10 @@ class DetailMovieActivity : AppCompatActivity() {
                         recommendations.add(recommendationMovie)
                     }
 
+                    if (jsonArray.length() == 0) {
+                        textView4.visibility = View.INVISIBLE
+                    }
+
                     val recommendationAdapter = MovieAdapter(recommendations)
 
                     rv_recommendation.layoutManager = LinearLayoutManager(
@@ -279,7 +285,7 @@ class DetailMovieActivity : AppCompatActivity() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                TODO("Not yet implemented")
+                Log.d("onFailure", error?.message.toString())
             }
 
         })
