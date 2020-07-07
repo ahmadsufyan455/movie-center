@@ -1,3 +1,7 @@
+/*
+* Created by: Ahmad Sufyan
+*/
+
 package com.fynzero.moviecenter.ui
 
 import android.app.SearchManager

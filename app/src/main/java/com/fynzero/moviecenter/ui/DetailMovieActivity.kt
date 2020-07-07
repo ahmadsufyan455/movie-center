@@ -84,9 +84,11 @@ class DetailMovieActivity : AppCompatActivity() {
                     tv_date.text = movieDetail.date
 
                     val builder = StringBuilder()
+                    var prefix = ""
                     for (i in genres) {
+                        builder.append(prefix)
+                        prefix = ", "
                         builder.append(i)
-                        builder.append(", ")
                     }
 
                     tv_genre.text = builder
@@ -147,9 +149,11 @@ class DetailMovieActivity : AppCompatActivity() {
                     }
 
                     val builder = StringBuilder()
+                    var prefix = ""
                     for (i in cast) {
+                        builder.append(prefix)
+                        prefix = ", "
                         builder.append(i)
-                        builder.append(", ")
                     }
 
                     tv_cast.text = builder

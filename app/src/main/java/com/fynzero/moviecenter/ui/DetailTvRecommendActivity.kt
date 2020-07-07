@@ -99,9 +99,11 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                     tv_date.text = tvDetail.date
 
                     val builder = StringBuilder()
+                    var prefix = ""
                     for (i in genres) {
+                        builder.append(prefix)
+                        prefix = ", "
                         builder.append(i)
-                        builder.append(", ")
                     }
 
                     tv_genre.text = builder
@@ -164,9 +166,11 @@ class DetailTvRecommendActivity : AppCompatActivity() {
                     }
 
                     val builder = StringBuilder()
+                    var prefix = ""
                     for (i in crews) {
+                        builder.append(prefix)
+                        prefix = ", "
                         builder.append(i)
-                        builder.append(", ")
                     }
 
                     tv_cast_tvShow.text = builder
