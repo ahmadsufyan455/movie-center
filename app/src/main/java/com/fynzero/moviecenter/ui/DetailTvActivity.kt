@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
@@ -121,9 +120,11 @@ class DetailTvActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar.visibility = View.GONE
-                view_detail_tv.visibility = View.GONE
-                Toast.makeText(this@DetailTvActivity, "your connection failed", Toast.LENGTH_SHORT)
-                    .show()
+                con_failed.visibility = View.VISIBLE
+                btn_tryAgain.setOnClickListener {
+                    finish()
+                    startActivity(intent)
+                }
             }
         })
     }

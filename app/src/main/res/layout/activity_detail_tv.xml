@@ -214,6 +214,30 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
+        <LinearLayout
+            android:id="@+id/con_failed"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/con_failed"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btn_tryAgain"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/try_again" />
+
+        </LinearLayout>
+
     </FrameLayout>
 
 </ScrollView>

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
@@ -17,6 +16,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.squareup.picasso.Picasso
 import cz.msebera.android.httpclient.Header
 import kotlinx.android.synthetic.main.activity_detail_recommendation.*
+import kotlinx.android.synthetic.main.activity_detail_recommendation.btn_tryAgain
+import kotlinx.android.synthetic.main.activity_detail_recommendation.con_failed
 import kotlinx.android.synthetic.main.activity_detail_recommendation.textView4
 import org.json.JSONObject
 import java.lang.Exception
@@ -111,12 +112,11 @@ class DetailRecommendationActivity : AppCompatActivity() {
                 error: Throwable?
             ) {
                 progressBar_rec.visibility = View.GONE
-                view_recommendation.visibility = View.GONE
-                Toast.makeText(
-                    this@DetailRecommendationActivity,
-                    "your connection failed",
-                    Toast.LENGTH_SHORT
-                ).show()
+                con_failed.visibility = View.VISIBLE
+                btn_tryAgain.setOnClickListener {
+                    finish()
+                    startActivity(intent)
+                }
             }
 
         })

@@ -12,4 +12,6 @@
     <string name="search">search</string>
     <string name="search_hint">search your movies</string>
     <string name="no_result">No results found</string>
+    <string name="con_failed">opsss.. your connection failed</string>
+    <string name="try_again">Try Again</string>
 </resources>
