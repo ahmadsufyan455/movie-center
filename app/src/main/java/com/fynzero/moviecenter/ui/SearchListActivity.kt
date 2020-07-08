@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.adapter.MovieUpcomingAdapter
 import com.fynzero.moviecenter.model.MovieModel
@@ -21,6 +22,7 @@ class SearchListActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = SearchListActivity::class.java.simpleName
+        const val apiKey = BuildConfig.API_KEY
         const val EXTRA_SEARCH = "extra_search"
     }
 
@@ -32,12 +34,11 @@ class SearchListActivity : AppCompatActivity() {
     }
 
     private fun getSearch() {
-        var bundle = Bundle()
-        bundle = intent.extras!!
+        val bundle = intent.extras!!
         val query = bundle.getString(EXTRA_SEARCH)
         val movieList = ArrayList<MovieModel>()
         val url =
-            "https://api.themoviedb.org/3/search/movie?api_key=e40c34a2a097d56ae9509a5ab8c47d44&language=en-US&query=$query&page=1&include_adult=false"
+            "https://api.themoviedb.org/3/search/movie?api_key=$apiKey&language=en-US&query=$query&page=1&include_adult=false"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

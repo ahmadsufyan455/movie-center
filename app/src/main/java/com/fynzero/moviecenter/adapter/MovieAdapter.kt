@@ -41,13 +41,13 @@ class MovieAdapter(private val movieList: ArrayList<MovieModel>) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val poster_url = "https://image.tmdb.org/t/p/w185"
+        private val posterURL = "https://image.tmdb.org/t/p/w185"
         fun bind(movieModel: MovieModel) {
             with(itemView) {
                 tv_title.text = movieModel.title
                 tv_date.text = movieModel.date
                 tv_rating.text = movieModel.rating.toString()
-                Picasso.get().load(poster_url + movieModel.poster).into(img_poster)
+                Picasso.get().load(posterURL + movieModel.poster).into(img_poster)
             }
         }
     }

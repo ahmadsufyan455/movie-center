@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.model.MovieModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -14,15 +15,15 @@ import java.lang.Exception
 class MovieUpcomingViewModel : ViewModel() {
     companion object {
         private val TAG = MovieUpcomingViewModel::class.java.simpleName
+        const val apiKey = BuildConfig.API_KEY
     }
 
     private val movieUpcomingList = MutableLiveData<ArrayList<MovieModel>>()
 
     fun setUpcoming() {
         val upcomingList = ArrayList<MovieModel>()
-        val api_key = "e40c34a2a097d56ae9509a5ab8c47d44"
         val url =
-            "https://api.themoviedb.org/3/movie/upcoming?api_key=${api_key}&language=en-US&page=1"
+            "https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=1"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

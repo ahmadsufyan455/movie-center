@@ -38,13 +38,13 @@ class TvRecommendationAdapter(private val tvRecommendationList: ArrayList<TvMode
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val poster_url = "https://image.tmdb.org/t/p/w185"
+        private val posterURL = "https://image.tmdb.org/t/p/w185"
         fun bind(tvModel: TvModel) {
             with(itemView) {
                 tv_name_rec.text = tvModel.name
                 tv_date_rec.text = tvModel.date
                 tv_rating_rec.text = tvModel.rating.toString()
-                Picasso.get().load(poster_url + tvModel.poster).into(img_poster_rec)
+                Picasso.get().load(posterURL + tvModel.poster).into(img_poster_rec)
             }
         }
     }

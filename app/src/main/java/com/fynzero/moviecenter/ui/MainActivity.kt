@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private val EXTRA_KEY = "extra_key"
+        const val EXTRA_KEY = "extra_key"
     }
 
     private var mSearchQuery: String? = null
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
 
-            // Gunakan method ini ketika search selesai atau OK
+            // use this method when success search
             override fun onQueryTextSubmit(query: String?): Boolean {
                 Toast.makeText(this@MainActivity, query, Toast.LENGTH_SHORT).show()
                 val extra = Bundle()
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
 
-            // Gunakan method ini untuk merespon tiap perubahan huruf pada searchView
+            // use this method to response change text
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
                     mSearchQuery = newText

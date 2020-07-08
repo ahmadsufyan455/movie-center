@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.adapter.MovieAdapter
 import com.fynzero.moviecenter.model.MovieModel
@@ -26,6 +27,7 @@ class DetailMovieActivity : AppCompatActivity() {
         const val EXTRA_DETAIL = "extra_detail"
         const val url_poster = "https://image.tmdb.org/t/p/w185"
         const val url_backdrop = "https://image.tmdb.org/t/p/w400"
+        const val apiKey = BuildConfig.API_KEY
         private val TAG = DetailMovieActivity::class.java.simpleName
     }
 
@@ -48,9 +50,8 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun getDetail() {
         val movie = intent.getParcelableExtra<MovieModel>(EXTRA_DETAIL)
         val genres = ArrayList<String>()
-        val movie_id = movie?.id
-        val api_key = "e40c34a2a097d56ae9509a5ab8c47d44"
-        val url = "https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api_key}&language=en-US"
+        val movieId = movie?.id
+        val url = "https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -123,9 +124,9 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun getCast() {
         val movie = intent.getParcelableExtra<MovieModel>(EXTRA_DETAIL)
-        val movie_id = movie?.id
+        val movieId = movie?.id
         val url =
-            "https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=e40c34a2a097d56ae9509a5ab8c47d44"
+            "https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=$apiKey"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -178,9 +179,9 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun getRecommendation() {
         val recommendations = ArrayList<MovieModel>()
         val movie = intent.getParcelableExtra<MovieModel>(EXTRA_DETAIL)
-        val movie_id = movie?.id
+        val movieId = movie?.id
         val url =
-            "https://api.themoviedb.org/3/movie/$movie_id/recommendations?api_key=e40c34a2a097d56ae9509a5ab8c47d44&language=en-US&page=1"
+            "https://api.themoviedb.org/3/movie/$movieId/recommendations?api_key=$apiKey&language=en-US&page=1"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -253,10 +254,10 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private fun getVideo() {
         val movies = intent.getParcelableExtra<MovieModel>(EXTRA_DETAIL)
-        val movie_id = movies?.id
+        val movieId = movies?.id
         val prefix = "https://www.youtube.com/watch?v="
         val url =
-            "https://api.themoviedb.org/3/movie/$movie_id/videos?api_key=e40c34a2a097d56ae9509a5ab8c47d44&language=en-US"
+            "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -280,7 +281,8 @@ class DetailMovieActivity : AppCompatActivity() {
                         startActivity(toTrailer)
                     }
 
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
             }
 
             override fun onFailure(

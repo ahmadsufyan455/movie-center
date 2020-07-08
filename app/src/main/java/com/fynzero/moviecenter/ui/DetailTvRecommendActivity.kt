@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.adapter.TvRecommendationAdapter
 import com.fynzero.moviecenter.model.TvModel
@@ -15,8 +16,6 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.squareup.picasso.Picasso
 import cz.msebera.android.httpclient.Header
-import kotlinx.android.synthetic.main.activity_detail_movie.*
-import kotlinx.android.synthetic.main.activity_detail_tv.*
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.*
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.ic_back
 import kotlinx.android.synthetic.main.activity_detail_tv_recommend.img_backdrop
@@ -40,6 +39,7 @@ class DetailTvRecommendActivity : AppCompatActivity() {
         const val EXTRA_DETAIL = "extra_detail"
         const val url_poster = "https://image.tmdb.org/t/p/w185"
         const val url_backdrop = "https://image.tmdb.org/t/p/w400"
+        const val apiKey = BuildConfig.API_KEY
         private val TAG = DetailTvRecommendActivity::class.java.simpleName
     }
 
@@ -62,9 +62,8 @@ class DetailTvRecommendActivity : AppCompatActivity() {
     private fun getTv() {
         val tvShow = intent.getParcelableExtra<TvModel>(EXTRA_DETAIL)
         val genres = ArrayList<String>()
-        val tv_id = tvShow?.id
-        val api_key = "e40c34a2a097d56ae9509a5ab8c47d44"
-        val url = "https://api.themoviedb.org/3/tv/${tv_id}?api_key=${api_key}&language=en-US"
+        val tvId = tvShow?.id
+        val url = "https://api.themoviedb.org/3/tv/${tvId}?api_key=${apiKey}&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -140,9 +139,9 @@ class DetailTvRecommendActivity : AppCompatActivity() {
 
     private fun getCast() {
         val tvShow = intent.getParcelableExtra<TvModel>(EXTRA_DETAIL)
-        val tv_id = tvShow?.id
+        val tvId = tvShow?.id
         val url =
-            "https://api.themoviedb.org/3/tv/$tv_id/credits?api_key=e40c34a2a097d56ae9509a5ab8c47d44&language=en-US"
+            "https://api.themoviedb.org/3/tv/$tvId/credits?api_key=$apiKey&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -194,10 +193,9 @@ class DetailTvRecommendActivity : AppCompatActivity() {
 
     private fun getRecommendation() {
         val tvShow = intent.getParcelableExtra<TvModel>(EXTRA_DETAIL)
-        val tv_id = tvShow?.id
-        val api_key = "e40c34a2a097d56ae9509a5ab8c47d44"
+        val tvId = tvShow?.id
         val url =
-            "https://api.themoviedb.org/3/tv/$tv_id/recommendations?api_key=$api_key&language=en-US&page=1"
+            "https://api.themoviedb.org/3/tv/$tvId/recommendations?api_key=$apiKey&language=en-US&page=1"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -271,10 +269,10 @@ class DetailTvRecommendActivity : AppCompatActivity() {
 
     private fun getVideo() {
         val tvShow = intent.getParcelableExtra<TvModel>(EXTRA_DETAIL)
-        val tv_id = tvShow?.id
+        val tvId = tvShow?.id
         val prefix = "https://www.youtube.com/watch?v="
         val url =
-            "https://api.themoviedb.org/3/tv/$tv_id/videos?api_key=e40c34a2a097d56ae9509a5ab8c47d44&language=en-US"
+            "https://api.themoviedb.org/3/tv/$tvId/videos?api_key=$apiKey&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
