@@ -10,6 +10,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.adapter.ViewPagerAdapter
@@ -78,5 +79,14 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(EXTRA_KEY, mSearchQuery)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.about) {
+            val toAbout = Intent(this, AboutActivity::class.java)
+            startActivity(toAbout)
+        }
+
+        return true
     }
 }
