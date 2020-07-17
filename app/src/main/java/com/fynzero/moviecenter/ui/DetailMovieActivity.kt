@@ -275,7 +275,11 @@ class DetailMovieActivity : AppCompatActivity() {
                     val key = jsonObject.getString("key")
 
                     tv_trailer.setOnClickListener {
-                        val toTrailer = Intent(Intent.ACTION_VIEW, Uri.parse(prefix + key))
+                        //val toTrailer = Intent(Intent.ACTION_VIEW, Uri.parse(prefix + key))
+                        val bundle = Bundle()
+                        val toTrailer = Intent(this@DetailMovieActivity, TrailerActivity::class.java)
+                        bundle.putString(TrailerActivity.EXTRA_KEY, key)
+                        toTrailer.putExtras(bundle)
                         startActivity(toTrailer)
                     }
 
