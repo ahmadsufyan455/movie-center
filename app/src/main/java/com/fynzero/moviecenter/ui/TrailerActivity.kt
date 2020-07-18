@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.model.MovieModel
@@ -14,6 +15,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import cz.msebera.android.httpclient.Header
 import kotlinx.android.synthetic.main.activity_trailer.*
+import kotlinx.android.synthetic.main.custom_actionbar_title.*
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -30,7 +32,10 @@ class TrailerActivity : AppCompatActivity() {
 
         val titles = intent.getParcelableExtra<MovieModel>(EXTRA_KEY)
         val title = titles?.title
-        supportActionBar?.title = "$title Trailer"
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setCustomView(R.layout.custom_actionbar_title)
+        action_bar_title.text = title
+
         getVideo()
     }
 

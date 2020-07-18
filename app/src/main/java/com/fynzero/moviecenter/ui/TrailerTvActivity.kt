@@ -14,6 +14,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import cz.msebera.android.httpclient.Header
 import kotlinx.android.synthetic.main.activity_tv_trailer.*
+import kotlinx.android.synthetic.main.custom_actionbar_title.*
 import org.json.JSONObject
 import java.lang.Exception
 
@@ -30,7 +31,9 @@ class TrailerTvActivity : AppCompatActivity() {
 
         val titles = intent.getParcelableExtra<TvModel>(EXTRA_KEY)
         val title = titles?.name
-        supportActionBar?.title = "$title Trailer"
+        supportActionBar?.setDisplayShowCustomEnabled(true)
+        supportActionBar?.setCustomView(R.layout.custom_actionbar_title)
+        action_bar_title.text = title
         getVideo()
     }
 
