@@ -1,7 +1,6 @@
 package com.fynzero.moviecenter.ui
 
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -42,7 +41,6 @@ class DetailRecommendationActivity : AppCompatActivity() {
         getDetail()
         getCast()
         getRecommendation()
-        getVideo()
 
         ic_back_rec.setOnClickListener {
             finish()
@@ -69,6 +67,7 @@ class DetailRecommendationActivity : AppCompatActivity() {
                 try {
 
                     val jsonObject = JSONObject(result)
+                    movie?.id = jsonObject.getInt("id")
                     movie?.title = jsonObject.getString("title")
                     movie?.poster = jsonObject.getString("poster_path")
                     movie?.backdrop = jsonObject.getString("backdrop_path")
@@ -96,6 +95,14 @@ class DetailRecommendationActivity : AppCompatActivity() {
                     tv_genre_rec.text = builder
 
                     tv_rating_rec.text = movie?.rating.toString()
+
+                    tv_trailer_rec.setOnClickListener {
+                        val trailer =
+                            Intent(this@DetailRecommendationActivity, TrailerActivity::class.java)
+                        trailer.putExtra(TrailerActivity.EXTRA_KEY, movie)
+                        startActivity(trailer)
+                    }
+
                     tv_overview_rec.text = movie?.overview
                     Picasso.get().load(url_poster + movie?.poster).into(img_poster_rec)
                     Picasso.get().load(url_backdrop + movie?.backdrop).into(img_backdrop_rec)
@@ -237,51 +244,6 @@ class DetailRecommendationActivity : AppCompatActivity() {
 
                 } catch (e: Exception) {
                     Log.d("Exception", e.message.toString())
-                }
-            }
-
-            override fun onFailure(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?,
-                error: Throwable?
-            ) {
-                Log.d("onFailure", error?.message.toString())
-            }
-
-        })
-    }
-
-    private fun getVideo() {
-        val movies = intent.getParcelableExtra<MovieModel>(EXTRA_DETAIL)
-        val movieId = movies?.id
-        val prefix = "https://www.youtube.com/watch?v="
-        val url =
-            "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US"
-        val client = AsyncHttpClient()
-        client.get(url, object : AsyncHttpResponseHandler() {
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?
-            ) {
-                val result = String(responseBody!!)
-                Log.d(TAG, result)
-
-                try {
-
-                    val responseObject = JSONObject(result)
-                    val jsonArray = responseObject.getJSONArray("results")
-
-                    val jsonObject = jsonArray.getJSONObject(0)
-                    val key = jsonObject.getString("key")
-
-                    tv_trailer_rec.setOnClickListener {
-                        val toTrailer = Intent(Intent.ACTION_VIEW, Uri.parse(prefix + key))
-                        startActivity(toTrailer)
-                    }
-
-                } catch (e: Exception) {
                 }
             }
 

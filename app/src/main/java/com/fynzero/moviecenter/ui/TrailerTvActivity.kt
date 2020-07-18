@@ -1,5 +1,7 @@
 package com.fynzero.moviecenter.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,17 +9,20 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
-import com.fynzero.moviecenter.model.MovieModel
+import com.fynzero.moviecenter.model.TvModel
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import cz.msebera.android.httpclient.Header
+import kotlinx.android.synthetic.main.activity_detail_tv_recommend.*
 import kotlinx.android.synthetic.main.activity_trailer.*
+import kotlinx.android.synthetic.main.activity_trailer.youtube_player_view
+import kotlinx.android.synthetic.main.activity_tv_trailer.*
 import org.json.JSONObject
 import java.lang.Exception
 
-class TrailerActivity : AppCompatActivity() {
+class TrailerTvActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_KEY = "key"
@@ -26,10 +31,10 @@ class TrailerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_trailer)
+        setContentView(R.layout.activity_tv_trailer)
 
-        val titles = intent.getParcelableExtra<MovieModel>(EXTRA_KEY)
-        val title = titles?.title
+        val titles = intent.getParcelableExtra<TvModel>(EXTRA_KEY)
+        val title = titles?.name
         supportActionBar?.title = "$title Trailer"
         getVideo()
     }
@@ -37,10 +42,10 @@ class TrailerActivity : AppCompatActivity() {
     private fun getVideo() {
         val listTitle = ArrayList<String>()
         val listKey = ArrayList<String>()
-        val movies = intent.getParcelableExtra<MovieModel>(EXTRA_KEY)
-        val movieId = movies?.id
+        val tvShow = intent.getParcelableExtra<TvModel>(EXTRA_KEY)
+        val tvId = tvShow?.id
         val url =
-            "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US"
+            "https://api.themoviedb.org/3/tv/$tvId/videos?api_key=$apiKey&language=en-US"
         val client = AsyncHttpClient()
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -64,7 +69,7 @@ class TrailerActivity : AppCompatActivity() {
                     }
 
                     // default trailer [0]
-                    youtube_player_view.addYouTubePlayerListener(object :
+                    youtube_player_view_tv.addYouTubePlayerListener(object :
                         AbstractYouTubePlayerListener() {
                         override fun onReady(youTubePlayer: YouTubePlayer) {
                             youTubePlayer.loadVideo(listKey[0], 0F)
@@ -73,19 +78,19 @@ class TrailerActivity : AppCompatActivity() {
 
                     // custom trailer
                     val adapter = ArrayAdapter(
-                        this@TrailerActivity,
+                        this@TrailerTvActivity,
                         android.R.layout.simple_list_item_1,
                         android.R.id.text1,
                         listTitle
                     )
-                    lv_list.adapter = adapter
+                    lv_tv.adapter = adapter
 
-                    youtube_player_view.addYouTubePlayerListener(object :
+                    youtube_player_view_tv.addYouTubePlayerListener(object :
                         AbstractYouTubePlayerListener() {
                         override fun onReady(youTubePlayer: YouTubePlayer) {
-                            lv_list.setOnItemClickListener { _, _, position, _ ->
+                            lv_tv.setOnItemClickListener { _, _, position, _ ->
                                 Toast.makeText(
-                                    this@TrailerActivity,
+                                    this@TrailerTvActivity,
                                     listTitle[position],
                                     Toast.LENGTH_SHORT
                                 ).show()

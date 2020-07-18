@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.TrailerActivity">
+    tools:context=".ui.TrailerTvActivity">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/youtube_player_view"
+        android:id="@+id/youtube_player_view_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:autoPlay="true"
@@ -16,7 +16,7 @@
         app:videoId="" />
 
     <ListView
-        android:id="@+id/lv_list"
+        android:id="@+id/lv_tv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="16dp" />
