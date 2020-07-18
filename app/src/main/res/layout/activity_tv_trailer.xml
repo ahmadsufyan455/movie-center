@@ -7,13 +7,19 @@
     android:orientation="vertical"
     tools:context=".ui.TrailerTvActivity">
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/youtube_player_view_tv"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:autoPlay="true"
-        app:showFullScreenButton="true"
-        app:videoId="" />
+        android:layout_height="wrap_content">
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:autoPlay="true"
+            app:showFullScreenButton="false"
+            app:videoId="" />
+
+    </ScrollView>
 
     <ListView
         android:id="@+id/lv_tv"
