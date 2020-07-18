@@ -1,7 +1,5 @@
 package com.fynzero.moviecenter.ui
 
-import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,9 +13,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import cz.msebera.android.httpclient.Header
-import kotlinx.android.synthetic.main.activity_detail_tv_recommend.*
-import kotlinx.android.synthetic.main.activity_trailer.*
-import kotlinx.android.synthetic.main.activity_trailer.youtube_player_view
 import kotlinx.android.synthetic.main.activity_tv_trailer.*
 import org.json.JSONObject
 import java.lang.Exception
@@ -69,12 +64,14 @@ class TrailerTvActivity : AppCompatActivity() {
                     }
 
                     // default trailer [0]
-                    youtube_player_view_tv.addYouTubePlayerListener(object :
-                        AbstractYouTubePlayerListener() {
-                        override fun onReady(youTubePlayer: YouTubePlayer) {
-                            youTubePlayer.loadVideo(listKey[0], 0F)
-                        }
-                    })
+                    if (jsonArray.length() != 0) {
+                        youtube_player_view_tv.addYouTubePlayerListener(object :
+                            AbstractYouTubePlayerListener() {
+                            override fun onReady(youTubePlayer: YouTubePlayer) {
+                                youTubePlayer.loadVideo(listKey[0], 0F)
+                            }
+                        })
+                    }
 
                     // custom trailer
                     val adapter = ArrayAdapter(

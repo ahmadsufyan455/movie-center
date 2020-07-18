@@ -64,12 +64,14 @@ class TrailerActivity : AppCompatActivity() {
                     }
 
                     // default trailer [0]
-                    youtube_player_view.addYouTubePlayerListener(object :
-                        AbstractYouTubePlayerListener() {
-                        override fun onReady(youTubePlayer: YouTubePlayer) {
-                            youTubePlayer.loadVideo(listKey[0], 0F)
-                        }
-                    })
+                    if (jsonArray.length() != 0) {
+                        youtube_player_view.addYouTubePlayerListener(object :
+                            AbstractYouTubePlayerListener() {
+                            override fun onReady(youTubePlayer: YouTubePlayer) {
+                                youTubePlayer.loadVideo(listKey[0], 0F)
+                            }
+                        })
+                    }
 
                     // custom trailer
                     val adapter = ArrayAdapter(
