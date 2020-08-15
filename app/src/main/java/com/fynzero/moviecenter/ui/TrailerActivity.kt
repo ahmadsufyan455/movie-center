@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import com.fynzero.moviecenter.BuildConfig
 import com.fynzero.moviecenter.R
 import com.fynzero.moviecenter.model.MovieModel
@@ -81,8 +80,8 @@ class TrailerActivity : AppCompatActivity() {
                     // custom trailer
                     val adapter = ArrayAdapter(
                         this@TrailerActivity,
-                        android.R.layout.simple_list_item_1,
-                        android.R.id.text1,
+                        R.layout.simple_list,
+                        R.id.txt_trailer,
                         listTitle
                     )
                     lv_list.adapter = adapter

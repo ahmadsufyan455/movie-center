@@ -18,19 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            tools:src="@drawable/mov3" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:background="#BF000000"
-            android:gravity="center"
-            android:maxLines="2"
-            android:textColor="@android:color/white"
-            android:textSize="12sp"
-            tools:text="The Outspot" />
+            tools:src="@drawable/mov3"
+            tools:ignore="ContentDescription" />
 
     </FrameLayout>
 
